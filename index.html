@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI精品出版 - 专业人格分析系统</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="description" content="MBTI精品出版 - 专业级人格分析系统，通过64道精心设计的测试题目，深度解析16种人格类型，为您提供科学准确的人格评估报告">
+    <meta name="keywords" content="MBTI,人格测试,性格分析,心理学,精品出版,专业评估">
+    <meta property="og:title" content="MBTI精品出版 - 专业级人格分析系统">
+    <meta property="og:description" content="专业的MBTI人格测试，深入了解您的性格类型">
+    <meta property="og:type" content="website">
+</head>
+<body>
+    <div class="container">
+        <!-- 开始页面 -->
+        <div id="welcomePage" class="page active">
+            <div class="welcome-content">
+                <div class="welcome-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                
+                <div class="premium-header">
+                    <div class="premium-badge">
+                        <i class="fas fa-crown"></i>
+                        <span>精品出版</span>
+                    </div>
+                </div>
+                <h1 class="welcome-title typography-hero">MBTI精品出版</h1>
+                <p class="welcome-subtitle typography-subhead">专业级人格分析系统</p>
+                
+                <div class="welcome-description typography-body">
+                    <p>MBTI（Myers-Briggs Type Indicator）是目前世界上最流行的性格评估工具之一。</p>
+                    <p>本测试包含64道精心设计的题目，将帮助您深入了解自己的性格类型。</p>
+                </div>
+                
+                <div class="welcome-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <span class="feature-text typography-caption">64道专业测试题</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <span class="feature-text typography-caption">16种人格类型分析</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <span class="feature-text typography-caption">详细性格报告</span>
+                    </div>
+                </div>
+                
+                <button class="apple-button" onclick="startTest()">
+                    <span>开始测试</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 测试页面 -->
+        <div id="testPage" class="page">
+            <div class="test-header">
+                <div class="progress-container">
+                    <div class="progress-header">
+                        <div class="progress-title typography-body">测试进度</div>
+                        <div class="progress-text typography-body" id="progressText">1 / 64</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-container apple-scale-in">
+                <div class="question-header">
+                    <div class="question-number typography-caption" id="questionNumber">问题 1</div>
+                    <h2 class="question-text" id="questionText">加载中...</h2>
+                </div>
+                
+                <div class="options-container">
+                    <div class="option-card" onclick="selectOption(0)" id="option0" tabindex="0">
+                        <div class="option-content" id="option0Text"></div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(1)" id="option1" tabindex="0">
+                        <div class="option-content" id="option1Text"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="test-footer">
+                <button class="nav-button" onclick="previousQuestion()" id="prevBtn" disabled>
+                    <i class="fas fa-arrow-left"></i>
+                    <span>上一题</span>
+                </button>
+                <button class="nav-button primary" onclick="nextQuestion()" id="nextBtn" disabled>
+                    <span>下一题</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 结果页面 -->
+        <div id="resultPage" class="page">
+            <div class="result-container">
+                <div class="result-hero apple-fade-in">
+                    <div class="personality-badge" id="personalityType">INTJ</div>
+                    <h1 class="personality-title" id="personalityTitle">建筑师</h1>
+                    <p class="personality-subtitle" id="personalitySubtitle">富有想象力和战略性的思想家</p>
+                </div>
+                
+                <div class="result-section apple-slide-up" style="animation-delay: 0.2s">
+                    <h2 class="section-title">性格维度分析</h2>
+                    <div class="dimensions-grid">
+                        <div class="dimension-item">
+                            <div class="dimension-header">
+                                <div class="dimension-label">能量导向</div>
+                                <div class="dimension-value" id="ei-label">外向 (E)</div>
+                            </div>
+                            <div class="dimension-track">
+                                <div class="dimension-fill" id="ei-bar"></div>
+                            </div>
+                            <div class="dimension-value" id="ei-value">75%</div>
+                        </div>
+                        
+                        <div class="dimension-item">
+                            <div class="dimension-header">
+                                <div class="dimension-label">认知方式</div>
+                                <div class="dimension-value" id="sn-label">直觉 (N)</div>
+                            </div>
+                            <div class="dimension-track">
+                                <div class="dimension-fill" id="sn-bar"></div>
+                            </div>
+                            <div class="dimension-value" id="sn-value">80%</div>
+                        </div>
+                        
+                        <div class="dimension-item">
+                            <div class="dimension-header">
+                                <div class="dimension-label">决策方式</div>
+                                <div class="dimension-value" id="tf-label">思考 (T)</div>
+                            </div>
+                            <div class="dimension-track">
+                                <div class="dimension-fill" id="tf-bar"></div>
+                            </div>
+                            <div class="dimension-value" id="tf-value">70%</div>
+                        </div>
+                        
+                        <div class="dimension-item">
+                            <div class="dimension-header">
+                                <div class="dimension-label">生活方式</div>
+                                <div class="dimension-value" id="jp-label">判断 (J)</div>
+                            </div>
+                            <div class="dimension-track">
+                                <div class="dimension-fill" id="jp-bar"></div>
+                            </div>
+                            <div class="dimension-value" id="jp-value">65%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-section apple-slide-up" style="animation-delay: 0.4s">
+                    <h2 class="section-title">性格特征</h2>
+                    <div class="personality-description">
+                        <p id="personalityDescription">加载中...</p>
+                    </div>
+                </div>
+                
+                <div class="result-section apple-slide-up" style="animation-delay: 0.6s">
+                    <h2 class="section-title">核心优势</h2>
+                    <ul class="strengths-list" id="strengths">
+                        <li class="strength-item">
+                            <div class="strength-icon"></div>
+                            <span>加载中...</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="action-buttons apple-slide-up" style="animation-delay: 0.8s">
+                    <button class="apple-button apple-button-secondary" onclick="retakeTest()">
+                        <i class="fas fa-redo"></i>
+                        <span>重新测试</span>
+                    </button>
+                    <button class="apple-button" onclick="shareResult()">
+                        <i class="fas fa-share-alt"></i>
+                        <span>分享结果</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
